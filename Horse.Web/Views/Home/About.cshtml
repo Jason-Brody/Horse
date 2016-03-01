@@ -1,9 +1,7 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewData["Title"] = "About";
 }
-<style>
-    #chatBox{
-        max-width:100%;
-    }
-</style>
-<textarea id="chatBox"></textarea>
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Use this area to provide additional information.</p>

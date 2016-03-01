@@ -46,7 +46,6 @@ namespace Horse.Agent
 
         private void btn_Start_Click(object sender, RoutedEventArgs e)
         {
-            
             startServer();
         }
 
@@ -62,8 +61,8 @@ namespace Horse.Agent
 
             options.Urls.Add("http://localhost:9000");
             options.Urls.Add("http://127.0.0.1:9000");
-            options.Urls.Add("http://192.168.2.3:9000");
-            options.Urls.Add(string.Format("http://{0}:9000", Environment.MachineName));
+            options.Urls.Add("http://15.107.23.67:9000");
+            options.Urls.Add(string.Format("http://{0}:9000", System.Net.Dns.GetHostEntry("").HostName));
             _singalR = WebApp.Start<Startup>(options);
             btn_Start.IsEnabled = false;
 

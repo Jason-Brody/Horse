@@ -27,8 +27,8 @@ namespace Horse.Agent.Client
 
         private IHubProxy _proxy;
 
-        //private string _server = "http://localhost:9000/signalr";
-        private string _server = "http://yanzhou29.asiapacific.hpqcorp.net:9000/signalr";
+        private string _server = "http://localhost:9000/signalr";
+        //private string _server = "http://yanzhou29.asiapacific.hpqcorp.net:9000/signalr";
         private HubConnection _connection;
 
         //private TaskProcess _tps;

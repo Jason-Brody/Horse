@@ -111,7 +111,6 @@
     </ApplicationDefinition>
     <Compile Include="AgentHub.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Models\ClientDetailInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TaskManager.cs" />
