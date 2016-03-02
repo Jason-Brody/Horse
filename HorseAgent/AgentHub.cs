@@ -21,17 +21,13 @@ namespace Horse.Agent
             Clients.All.sayHello();
         }
 
-        public List<AppInfo> GetSoftwares()
+        public List<AppSimpleInfo> GetSoftwares()
         {
-            return Utils.GetSoftwares();
+            return Utils.InstalledPrograms.GetInstalledPrograms();
         }
-
-       
 
         public override Task OnConnected()
         {
-          
-
             Application.Current.Dispatcher.Invoke(() => {      
                 ((MainWindow)Application.Current.MainWindow).AddClient(new ClientDetailInfo(Context.ConnectionId,Context.User.Identity.Name,DateTime.Now));
             });

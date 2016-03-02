@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Horse.Agent
+namespace Horse.Agent.Utils
 {
     public static class InstalledPrograms
     {

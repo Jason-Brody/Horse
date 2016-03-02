@@ -41,10 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgentTask.cs" />
-    <Compile Include="AppInfo.cs" />
-    <Compile Include="ClientInfo.cs" />
+    <Compile Include="AppSimpleInfo.cs" />
     <Compile Include="FolderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterInfo.cs" />
     <Compile Include="TaskProcess.cs" />
     <Compile Include="WPFNotify.cs" />
   </ItemGroup>

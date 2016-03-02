@@ -23,12 +23,10 @@ namespace Horse.Agent.Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ClientInfo _client;
-
         private IHubProxy _proxy;
 
-        private string _server = "http://localhost:9000/signalr";
-        //private string _server = "http://yanzhou29.asiapacific.hpqcorp.net:9000/signalr";
+        //private string _server = "http://localhost:9000/signalr";
+        private string _server = "http://15.107.23.67:9000/signalr";
         private HubConnection _connection;
 
         //private TaskProcess _tps;
@@ -36,9 +34,6 @@ namespace Horse.Agent.Client
         public MainWindow()
         {
             InitializeComponent();
-            _client = new ClientInfo() { Name = System.Security.Principal.WindowsIdentity.GetCurrent().Name };
-            //_tps = new TaskProcess();
-          
         }
 
         private async void connectAsync()
@@ -46,7 +41,7 @@ namespace Horse.Agent.Client
             _connection = new HubConnection(_server,useDefaultUrl:false);
             _connection.Credentials = CredentialCache.DefaultCredentials;
             _connection.Closed += _connection_Closed;
-            _proxy = _connection.CreateHubProxy("AgentHub");
+            _proxy = _connection.CreateHubProxy("chatHub");
             
           
             //_proxy.On<TaskProcess>("ReturnTaskInfo", p=> {
@@ -69,8 +64,8 @@ namespace Horse.Agent.Client
 
         private async void btn_RunTask_Click(object sender, RoutedEventArgs e)
         {
-            var result =await _proxy.Invoke<List<AppInfo>>("GetSoftwares");
-            var a = result;
+            //var result =await _proxy.Invoke<List<AppInfo>>("GetSoftwares");
+            //var a = result;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
