@@ -7,8 +7,8 @@
     <ProjectGuid>{D2B29D05-7CBE-45F7-B1D6-52C51734C92B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TransportModel</RootNamespace>
-    <AssemblyName>TransportModel</AssemblyName>
+    <RootNamespace>Horse.TransportModel</RootNamespace>
+    <AssemblyName>Horse.TransportModel</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

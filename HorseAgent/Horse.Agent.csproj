@@ -116,7 +116,7 @@
     <Compile Include="AgentHub.cs" />
     <Compile Include="Utils\ClientRegister.cs" />
     <Compile Include="Utils\HttpClientHelper.cs" />
-    <Compile Include="Utils\InstalledPrograms.cs" />
+    <Compile Include="Utils\Tools.cs" />
     <Compile Include="Models\ClientDetailInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TaskManager.cs" />

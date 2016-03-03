@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Horse.Agent.Utils
 {
-    public static class InstalledPrograms
+    public static class Tools
     {
         const string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
 
@@ -21,33 +23,33 @@ namespace Horse.Agent.Utils
             result.AddRange(GetInstalledProgramsFromRegistry(RegistryView.Registry64));
             //GetIcons(result);
             var props = typeof(AppSimpleInfo).GetProperties();
-            using (StreamWriter sw = new StreamWriter("softwares.csv", false, Encoding.UTF8))
-            {
-                string line = "";
-                foreach (var prop in props)
-                {
-                    line += prop.Name + "|";
-                }
-                line = line.Substring(0, line.Length - 1);
-                sw.WriteLine(line);
+            //using (StreamWriter sw = new StreamWriter("softwares.csv", false, Encoding.UTF8))
+            //{
+            //    string line = "";
+            //    foreach (var prop in props)
+            //    {
+            //        line += prop.Name + "|";
+            //    }
+            //    line = line.Substring(0, line.Length - 1);
+            //    sw.WriteLine(line);
 
-                foreach (var item in result)
-                {
-                    line = "";
-                    foreach (var prop in props)
-                    {
-                        var val = prop.GetValue(item);
-                        string str = val == null ? "" : val.ToString();
-                        line += str + "|";
-                    }
-                    if (line != "")
-                    {
-                        line = line.Substring(0, line.Length - 1);
-                        sw.WriteLine(line);
-                    }
+            //    foreach (var item in result)
+            //    {
+            //        line = "";
+            //        foreach (var prop in props)
+            //        {
+            //            var val = prop.GetValue(item);
+            //            string str = val == null ? "" : val.ToString();
+            //            line += str + "|";
+            //        }
+            //        if (line != "")
+            //        {
+            //            line = line.Substring(0, line.Length - 1);
+            //            sw.WriteLine(line);
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
             return result;
         }
@@ -75,8 +77,6 @@ namespace Horse.Agent.Utils
         //    }
 
         //}
-
-
 
         private static IEnumerable<AppSimpleInfo> GetInstalledProgramsFromRegistry(RegistryView registryView)
         {
@@ -123,6 +123,19 @@ namespace Horse.Agent.Utils
                 && string.IsNullOrEmpty(releaseType)
                 && string.IsNullOrEmpty(parentName)
                 && (systemComponent == null);
+        }
+
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
         }
     }
 }

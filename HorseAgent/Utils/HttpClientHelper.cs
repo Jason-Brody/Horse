@@ -39,7 +39,7 @@ namespace Horse.Agent.Utils
             return null;
         }
 
-        public static async Task<T> PostInfo<T>(string api, T data, Dictionary<string, string> headers = null) where T : class, new()
+        public static async Task<bool> PostInfo<T>(string api, T data, Dictionary<string, string> headers = null) where T : class, new()
         {
             var handler = new HttpClientHandler() { UseDefaultCredentials = true };
             using (var client = new HttpClient(handler))
@@ -54,16 +54,18 @@ namespace Horse.Agent.Utils
                         client.DefaultRequestHeaders.Add(item.Key, item.Value);
                     }
                 }
-
-                HttpContent content = new StringContent(JsonConvert.SerializeObject(data));
+                
+                
+               
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(data),Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(api, content);
                 if (response.IsSuccessStatusCode)
                 {
                     string result = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<T>(result);
+                    return true;
                 }
             }
-            return null;
+            return false;
         }
     }
 }

@@ -16,14 +16,14 @@ namespace Horse.Agent
  
     public class AgentHub:Hub
     {
-        public void RunTask(AgentTask t)
+        public void RunTask()
         {
             Clients.All.sayHello();
         }
 
         public List<AppSimpleInfo> GetSoftwares()
         {
-            return Utils.InstalledPrograms.GetInstalledPrograms();
+            return Utils.Tools.GetInstalledPrograms();
         }
 
         public override Task OnConnected()

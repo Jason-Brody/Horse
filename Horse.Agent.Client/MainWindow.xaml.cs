@@ -25,8 +25,8 @@ namespace Horse.Agent.Client
     {
         private IHubProxy _proxy;
 
-        //private string _server = "http://localhost:9000/signalr";
-        private string _server = "http://15.107.23.67:9000/signalr";
+        private string _server = "http://localhost:9000/signalr";
+        //private string _server = "http://15.107.23.67:9000/signalr";
         private HubConnection _connection;
 
         //private TaskProcess _tps;
@@ -41,9 +41,11 @@ namespace Horse.Agent.Client
             _connection = new HubConnection(_server,useDefaultUrl:false);
             _connection.Credentials = CredentialCache.DefaultCredentials;
             _connection.Closed += _connection_Closed;
-            _proxy = _connection.CreateHubProxy("chatHub");
-            
-          
+            _proxy = _connection.CreateHubProxy("agentHub");
+
+            _proxy.On("sayHello", () => {
+                MessageBox.Show("Hello");
+            });
             //_proxy.On<TaskProcess>("ReturnTaskInfo", p=> {
             //    copyTask(_tps, p);
             //});
@@ -58,13 +60,21 @@ namespace Horse.Agent.Client
 
         private void btn_Connect_Click(object sender, RoutedEventArgs e)
         {
-            connectAsync();
+            List<HubClient> clients = new List<HubClient>();
+            for(int i =0;i<100;i++)
+            {
+                HubClient client = new HubClient(_server);
+                clients.Add(client);
+                client.Connect();
+            }
+
+           // connectAsync();
             btn_Connect.IsEnabled = false;
         }
 
-        private async void btn_RunTask_Click(object sender, RoutedEventArgs e)
+        private void btn_RunTask_Click(object sender, RoutedEventArgs e)
         {
-            //var result =await _proxy.Invoke<List<AppInfo>>("GetSoftwares");
+            _proxy.Invoke("RunTask");
             //var a = result;
         }
 

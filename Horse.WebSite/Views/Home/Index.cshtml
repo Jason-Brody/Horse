@@ -1,0 +1,101 @@
+﻿@model List<Horse.WebSite.Models.Machine>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    #computerList {
+        overflow-y: auto;
+        overflow-x: visible;
+        height: 500px;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-lg-2">
+        <h3 class="text-center">My Computer List </h3>
+        <div id="computerList">
+            <div class="list-group">
+                @foreach (var m in Model)
+            {
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">@m.Name</h4>
+                        <p class="list-group-item-text">@m.IPAddress</p>
+                        <div class="progress list-group-item-text" style="display:none">
+                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-lg-10">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="#">Softwares</a></li>
+            <li role="presentation"><a href="#">Available Softwares</a></li>
+            <li role="presentation"><a href="#">Tasks</a></li>
+            <li role="presentation"><a href="#">Settings</a></li>
+        </ul>
+        <div id="detailContent">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<p>test</p>
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+    <script src="~/Scripts/MyScripts/MySignalR.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            //var e;
+
+            //var c = new client("http://localhost:9000/signalr");
+            //c.connect();
+
+
+
+
+            $(".list-group-item").click(function () {
+                var e = $(this);
+                e.children(".progress").css({ "display": "block" });
+
+                
+                    var c = new agentHub("http://16.168.22.93:9000/signalr");
+                    c.connect(function () {
+                        c.disConnect();
+                        e.children(".progress").css({ "display": "none" });
+                    }, function () {
+                        alert("fail");
+                    });
+                
+
+                
+            });
+
+
+            //var connection = $.hubConnection("http://localhost:9000/signalr", { useDefaultPath: false });
+            //var proxy = connection.createHubProxy('agentHub');
+            //proxy.on('sayHello', function () {
+            //    alert("hello");
+            //});
+
+            //connection.start().done(function () {
+            //    alert("connected");
+            //});
+        });
+
+    </script>
+}

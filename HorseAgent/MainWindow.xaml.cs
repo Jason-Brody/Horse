@@ -37,6 +37,7 @@ namespace Horse.Agent
         public MainWindow()
         {
             InitializeComponent();
+            Utils.ClientRegister.RegisterAddress();
             lv_Clients.ItemsSource = _clientList;
             //ClientRegister.RegisterAddress();
          
@@ -64,25 +65,15 @@ namespace Horse.Agent
 
             options.Urls.Add("http://localhost:9000");
             options.Urls.Add("http://127.0.0.1:9000");
-            //options.Urls.Add("http://15.107.23.67:9000");
+            var ip = Utils.Tools.GetLocalIPAddress();
+            options.Urls.Add($"http://{ip}:9000");
             options.Urls.Add(string.Format("http://{0}:9000", System.Net.Dns.GetHostEntry("").HostName));
             _singalR = WebApp.Start<Startup>(options);
             btn_Start.IsEnabled = false;
 
         }
 
-        public static string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            throw new Exception("Local IP Address Not Found!");
-        }
+        
         public void AddClient(ClientDetailInfo client)
         {
             _clientList.Add(client);

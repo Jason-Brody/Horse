@@ -14,6 +14,8 @@ namespace Horse.TransportModel
 
         private bool _isIndeterminate;
 
+        private string _msg;
+
         public TaskProgress() { }
 
 
@@ -31,6 +33,12 @@ namespace Horse.TransportModel
         {
             get { return _current; }
             set { SetProperty<int>(ref _current, value); }
+        }
+
+        public string Message
+        {
+            get { return _msg; }
+            set { SetProperty<string>(ref _msg, value); }
         }
 
         public int TotalProcess
